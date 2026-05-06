@@ -13,8 +13,7 @@ import {
 import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-const LoginScreen = ({navigation}) => {
-  
+const SigninScreen = ({navigation}) => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <SafeAreaView style={styles.container}>
@@ -35,6 +34,13 @@ const LoginScreen = ({navigation}) => {
 
             {/* FORM */}
             <View style={styles.form}>
+              <Text style={styles.label}>Name</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Enter your name"
+                placeholderTextColor="rgba(133, 132, 132, 0.5)"
+              />
+
               <Text style={styles.label}>Email</Text>
               <TextInput
                 style={styles.input}
@@ -55,9 +61,9 @@ const LoginScreen = ({navigation}) => {
                 <Text style={styles.buttontext}>Login</Text>
               </TouchableOpacity>
               <View style={styles.footerContainer}>
-                <Text style={styles.footerText}>Don't have an account? </Text>
-                <TouchableOpacity onPress={() => navigation.navigate('signin')}>
-                  <Text style={styles.signUpText}>Sign Up</Text>
+                <Text style={styles.footerText}>Already have an account? </Text>
+                <TouchableOpacity onPress={() => navigation.navigate('login')}>
+                  <Text style={styles.signUpText}>Login In</Text>
                 </TouchableOpacity>
               </View>
             </View>
@@ -68,7 +74,7 @@ const LoginScreen = ({navigation}) => {
   );
 };
 
-export default LoginScreen;
+export default SigninScreen;
 
 const styles = StyleSheet.create({
   container: {
