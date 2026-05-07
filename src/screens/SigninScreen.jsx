@@ -18,7 +18,7 @@ const SigninScreen = ({navigation}) => {
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <SafeAreaView style={styles.container}>
         <ImageBackground
-          source={require('../assets/white.jpg')}
+          source={require('../../assets/white.jpg')}
           style={styles.image}
           resizeMode="cover"
         >

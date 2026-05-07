@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native';
 import React from 'react'
-import HomeStack from './navigation/HomeStack';
+import HomeStack from './src/navigation/HomeStack';
 
 const App = () => {
   return (

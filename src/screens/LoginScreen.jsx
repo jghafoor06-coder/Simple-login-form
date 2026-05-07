@@ -10,16 +10,41 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useDispatch, useSelector } from 'react-redux';
+import { Login } from '../redux/auth/AuthSlice';
 
 const LoginScreen = ({navigation}) => {
-  
+
+  const dispatch = useDispatch();
+  const userData = useSelector(state => state.auth.userData);
+
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  useEffect(() => {
+    if (userData) {
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'home' }],
+      });
+    }
+  }, [userData, navigation]);
+
+  const handleLogin = () => {
+    const params = {
+      username: username,
+      password: password,
+    };
+    dispatch(Login(params));
+  };
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <SafeAreaView style={styles.container}>
         <ImageBackground
-          source={require('../assets/white.jpg')}
+          source={require('../../assets/white.jpg')}
           style={styles.image}
           resizeMode="cover"
         >
@@ -27,7 +52,7 @@ const LoginScreen = ({navigation}) => {
             style={styles.overlay}
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
           >
-            {/* TOP TEXT (fixed position) */}
+            {/* TOP TEXT */}
             <View style={styles.topSection}>
               <Text style={styles.text}>Welcome to your space</Text>
               <Text style={styles.smalltext}>Start where you left off</Text>
@@ -40,18 +65,20 @@ const LoginScreen = ({navigation}) => {
                 style={styles.input}
                 placeholder="Enter your email"
                 placeholderTextColor="rgba(133, 132, 132, 0.5)"
-                keyboardType="email-address"
+                value={username}
+                onChangeText={setUsername}
               />
 
               <Text style={styles.label}>Password</Text>
               <TextInput
                 style={styles.input}
                 placeholder="********"
-                secureTextEntry
                 placeholderTextColor="rgba(133, 132, 132, 0.5)"
+                value={password}
+                onChangeText={setPassword}
               />
 
-              <TouchableOpacity style={styles.buttonbg}>
+              <TouchableOpacity style={styles.buttonbg} onPress={handleLogin}>
                 <Text style={styles.buttontext}>Login</Text>
               </TouchableOpacity>
               <View style={styles.footerContainer}>
